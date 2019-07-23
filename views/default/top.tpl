@@ -1,5 +1,5 @@
 <nav id="top" class="container-fluid">
-	<p class="text-right small"><a href="https://wyremski.pl/skrypt/empresa" title="Empresa - script" target="_blank">Empresa v1.2</a></p>
+	<p class="text-right small"><a href="https://blog.wyremski.pl/skrypt-katalogu-firm-empresa/" title="Empresa - script" target="_blank">Empresa v1.2</a></p>
 </nav>
 <nav class="navbar navbar-default navbar-fixed-top" id="menu_box">
   <div class="container-fluid">
