@@ -1,0 +1,78 @@
+
+{include file="top.tpl"}
+
+<div class="page_box">
+	{if isset($slider)}
+		<div id="slider" class="carousel slide hidden-xs" data-ride="carousel">
+			<div class="carousel-inner" role="listbox">
+				{foreach from=$slider item=item key=key name=slider}
+					<div class="item {if $smarty.foreach.slider.iteration==1}active{/if}">
+						{$item}
+					</div>
+				{/foreach}
+			</div>
+			<a class="left carousel-control" href="#slider" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#slider" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	{/if}
+
+	{include file="search_main.tpl"}
+	
+	{if isset($slider)}<div style="height:50px; width:100%:"></div>{/if}
+	
+	{if $settings.ads_1}<div class="ads">{$settings.ads_1}</div>{/if}
+	
+	{if isset($offers)}
+		<div class="container">
+			{foreach from=$offers item=item key=key name=offers}
+				<div class="col-md-3 col-sm-4 text-center">
+					<div class="offers_index overflow_hidden {if $item.promoted}offers_index_promoted{/if}" itemscope itemtype="https://schema.org/Corporation">
+						<a href="{$item.id},{$item.slug}" title="{$item.name}" itemprop="url" class="img_link"><img src="{if $item.thumb}upload/photos/{$item.thumb}{else}{$settings.base_url}/views/{$settings.template}/images/no_image.png{/if}" alt="{$item.name}" onerror="this.src='{$settings.base_url}/views/{$settings.template}/images/no_image.png'" itemprop="image"></a>
+						<h4><a href="{$item.id},{$item.slug}" title="{$item.name}"><span itemprop="name">{$item.name|truncate:50}</span></a></h4>
+						<p>{if !empty($item.category.name)}<a href="{$links.offers}?search=&category%5B%5D={$item.category.slug}" title="{$item.category.name}">{$item.category.name}</a>{/if}
+						{if !empty($item.category.name) && !empty($item.state.name)}{else}&nbsp;{/if}<br>
+						{if !empty($item.state.name)}<a href="{$links.offers}?search=&state%5B%5D={$item.state.slug}" title="{$item.state.name}"><span itemprop="address">{$item.state.name}</span></a>{else}&nbsp;{/if}</p>
+					</div>
+				</div>
+				{if $smarty.foreach.offers.index%4 == 3} 
+					<div class="clearfix visible-md-block visible-lg-block"></div>
+				{/if}
+				{if $smarty.foreach.offers.index%3 == 2} 
+					<div class="clearfix visible-sm-block"></div>
+				{/if}
+			{/foreach}
+			<br><br>
+			<div class="text-center">	
+				<a href="{$links.offers}" title="{'Search the best offers'|lang}" class="btn btn-1">{'See all offers'|lang}</a>
+			</div>
+		</div>
+	{/if}
+	
+	{if $settings.ads_2}<div class="ads">{$settings.ads_2}</div>{/if}
+	
+	{if $index_page.text_1}
+		<div id="index_text_1">
+			<div class="site_text">
+				{$index_page.text_1}
+			</div>
+		</div>
+	{/if}
+	
+	{if $settings.ads_3}<div class="ads">{$settings.ads_3}</div>{/if}
+	
+	{if isset($articles)}
+		<div class="container">
+			<br><br><h3 class="text-center">{'Recent articles'|lang}</h3>
+			<br><br>
+			{include file="articles.tpl"}
+		</div>
+	{/if}
+</div>
+
+{include file="footer.tpl"}

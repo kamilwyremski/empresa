@@ -1,0 +1,43 @@
+﻿
+<div class="page-header">
+	<h1><span class="glyphicon glyphicon-hdd"></span> {'Logs offers'|lang}</h1>
+	<p>{'Here you can see logs offers'|lang}</p>
+</div>
+
+{if isset($logs_offers)}
+	<div class="table-responsive">
+		<table class="table parent_select_checkbox table-striped table-bordered table-condensed">
+			<tr>
+				<th></th>
+				<th>{'Offer'|lang}</th>
+				<th>{'User'|lang}</th>
+				<th class="text-center">{'IP'|lang}
+					<a href="?{$pagination.page_url.sort_cms}&sort=ip" title="{'Sort by IP'|lang}" class="glyphicon glyphicon-sort-by-attributes"></a>
+					<a href="?{$pagination.page_url.sort_cms}&sort=ip&sort_desc" title="{'Sort descending by IP'|lang}" class="glyphicon glyphicon-sort-by-attributes-alt"></a>
+				</th>
+				<th class="text-center" style="width:95px">{'Date'|lang}
+					<a href="?{$pagination.page_url.sort_cms}&sort=date" title="{'Sort by date'|lang}" class="glyphicon glyphicon-sort-by-attributes"></a>
+					<a href="?{$pagination.page_url.sort_cms}&sort=date&sort_desc" title="{'Sort descending by date'|lang}" class="glyphicon glyphicon-sort-by-attributes-alt"></a>
+				</th>
+			</tr>
+				
+			{foreach key=key item=item from=$logs_offers name=logs_offers}
+				<tr>
+					<td class="text-center">{$smarty.foreach.logs_offers.iteration+$pagination.limit_start}</td>
+					<td><a href="../{$item.offer.id},{$item.offer.slug}" title="{$item.offer.name}" target="_blank">{$item.offer.name}</a></td>
+					<td>{if isset($item.user)}<a href="../{$links.profile}/{$item.user.username}" title="{'Profile of'|lang}: {$item.user.username}" target="_blank">{$item.user.username}</a> - {if $smarty.const._CMS_TEST_MODE_}TEST{else}<a href="mailto:{$item.user.email}" title="{'Write to:'|lang} {$item.user.email}">{$item.user.email}</a>{/if}{/if}</td>
+					<td class="text-center">{$item.ip}</td>
+					<td class="text-center"><b>{$item.date|date_format:"%d-%m-%Y"}</b><br>{$item.date|date_format:"%H:%M"}</td>
+				</tr>
+			{/foreach}		
+		</table>
+	</div>
+	
+	{include file="pagination.tpl"}
+	
+{else}
+	<h4 class="text-danger">{'Nothing found'|lang}</h4>
+{/if}
+
+
+

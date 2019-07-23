@@ -1,0 +1,50 @@
+﻿
+<div class="page-header">
+	<h1><span class="glyphicon glyphicon-tree-deciduous"></span> {'Offers option'|lang}</h1>
+	<p>{'Here you can edit the offers options'|lang}</p>
+</div>
+<p><a href="?module=offers_options" title="{'Back to list offers options'|lang}" class="btn btn-success">{'Back to list offers options'|lang}</a></p>
+<br>
+<form method="post" class="form-horizontal" role="form">
+	{if isset($offers_option)}
+		<input type="hidden" name="action" value="edit_option">
+		<input type="hidden" name="id" value="{$offers_option.id}">
+	{else}
+		<input type="hidden" name="action" value="add_option">
+	{/if}
+	<div class="form-group">
+		<label for="name" class="col-sm-2 control-label">{'The name'|lang}:</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" name="name" required maxlength="128" placeholder="{'The name'|lang}" title="{'The name'|lang}" {if isset($offers_option)}value="{$offers_option.name}"{/if}>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-10 col-sm-offset-2">
+			<label><input type="checkbox" name="required" {if isset($offers_option) && $offers_option.required}checked{/if} title="{'Check f the field should be required'|lang}"> {'Required field'|lang}</label>
+		</div>
+	</div>
+	{if isset($offers_options_kinds)}
+		<div class="form-group">
+			<label for="kind" class="col-sm-2 control-label">{'Kind'|lang}:</label>
+			<div class="col-sm-10">
+				<select name="kind" required class="offers_option_select form-control">
+					{foreach from=$offers_options_kinds item=item key=key}
+						<option value="{$key}" {if isset($offers_option) && $offers_option.kind==$key}selected{/if}>{$item}</option>
+					{/foreach}
+				</select>
+			</div>
+		</div>
+	{/if}
+	<div class="form-group offers_option_label">
+		<label for="select_choices" class="col-sm-2 control-label">{'Enter after the coma available choices'|lang}:</label>
+		<div class="col-sm-10">
+			<textarea class="form-control" placeholder="{'Enter after the coma available choices'|lang}" title="{'Enter after the coma available choices'|lang}" required name="select_choices">{if isset($offers_option) && $offers_option.kind=='select'}{$offers_option.select_choices}{/if}</textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<input type="submit" value="{'Save'|lang}" class="btn btn-primary">
+		</div>
+	</div>
+</form>
+

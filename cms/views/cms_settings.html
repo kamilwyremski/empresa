@@ -1,0 +1,197 @@
+﻿
+<div class="modal fade" id="modal_remove_logs" tabindex="-1" role="dialog" aria-labelledby="{'Remove logs'|lang}">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">{'Remove logs'|lang}</h4>
+			</div>
+			<form method="post">
+				<input type="hidden" name="action" value="cms_remove_logs">
+				<div class="modal-body">
+					<p>{'Sure you want to delete the log to log into the CMS system?'|lang}</p>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="{'Cancel'|lang}">
+					<input type="submit" class="btn btn-danger" value="{'Execute'|lang}">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modal_logout" tabindex="-1" role="dialog" aria-labelledby="{'Logout all users of CMS'|lang}">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">{'Logout all users of CMS'|lang}</h4>
+			</div>
+			<form method="post">
+				<input type="hidden" name="action" value="cms_logout_all">
+				<div class="modal-body">
+					<p>{'This will remove from the database all sessions CMS'|lang}</p>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="{'Cancel'|lang}">
+					<input type="submit" class="btn btn-danger" value="{'Execute'|lang}">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="page-header">
+	<h1><span class="glyphicon glyphicon-user"></span> {'Settings CMS'|lang}</h1>
+</div>
+{if isset($info)}
+	<div class="alert alert-info" role="alert"><span class="glyphicon glyphicon-exclamation-sign"></span> {$info}</div>
+{elseif isset($error)}
+	<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign"></span> {$error}</div>
+{/if}
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel-form panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> {'Change the access data to the panel CMS'|lang}</h3>
+			</div>
+			<form method="post" class="panel-body">
+				<input type="hidden" name="action" value="cms_change_user">
+				<div class="form-group">
+					<label for="new_username">{'New username'|lang}</label>
+					<input type="text" class="form-control" name="new_username" placeholder="administrator" id="new_username" required value="{$user_cms->username}" title="{'New username'|lang}" maxlength="32">
+				</div>
+				<div class="form-group">
+					<label for="new_password">{'New password'|lang}</label>
+					<input type="password" class="form-control" name="new_password" placeholder="****" id="new_password" required title="{'New password'|lang}">
+				</div>
+				<div class="form-group">
+					<label for="repeat_new_password">{'Repeat new password'|lang}</label>
+					<input type="password" class="form-control" name="repeat_new_password" placeholder="****" id="repeat_new_password" required title="{'Repeat new password'|lang}">
+				</div>
+				<input type="submit" class="btn btn-success btn-block" value="{'Change the data!'|lang}">
+			</form>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="panel-form panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> {'Add User CMS'|lang}</h3>
+			</div>
+			<form method="post" class="panel-body">
+				<input type="hidden" name="action" value="cms_add_user">
+				<div class="form-group">
+					<label for="new_username">{'Username'|lang}</label>
+					<input type="text" class="form-control" name="username" placeholder="administrator" id="username" required title="{'Username'|lang}" maxlength="32">
+				</div>
+				<div class="form-group">
+					<label for="new_password">{'Password'|lang}</label>
+					<input type="password" class="form-control" name="password" placeholder="****" id="password" required title="{'Password'|lang}">
+				</div>
+				<div class="form-group">
+					<label for="repeat_new_password">{'Repeat password'|lang}</label>
+					<input type="password" class="form-control" name="repeat_password" placeholder="****" id="repeat_password" required title="{'Repeat password'|lang}">
+				</div>
+				<input type="submit" class="btn btn-primary btn-block" value="{'Add user'|lang}">
+			</form>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel-form panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> {'Member List CMS'|lang}</h3>
+			</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table">
+						{foreach key=key item=item from=$cms_users name=cms_users}
+							<tr>
+								<td>{$smarty.foreach.cms_users.iteration}</td>
+								<td>{$item.username}</td>
+								<td class="text-center">{if $item.id!=$user_cms->id}<a href="#" data-toggle="modal" data-target="#remove_{$item.id}" title="{'Delete user'|lang}"><span class="glyphicon glyphicon-remove"></span></a>{/if}</td>
+							</tr>
+{if $item.id!=$user_cms->id}							
+	<div class="modal fade" id="remove_{$item.id}" tabindex="-1" role="dialog" aria-labelledby="{'Delete user'|lang}">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">{'Delete user'|lang} {$item.username}</h4>
+				</div>
+				<form method="post">
+					<input type="hidden" name="action" value="cms_remove_user">
+					<input type="hidden" name="id" value="{$item.id}">
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="{'Cancel'|lang}">
+						<input type="submit" class="btn btn-primary" value="{'Execute'|lang}">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+{/if}
+						{/foreach}
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="panel-form panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> {'Sessions CMS'|lang}</h3>
+			</div>
+			<div class="panel-body">
+				<p>{'Logout all users of CMS'|lang}</p>
+				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal_logout">{'Log out'|lang}</button>
+			</div>
+		</div>
+	</div>
+</div>
+{if !empty($cms_logs)}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> {'Logs logon panel CMS'|lang}</h3>
+		</div>
+		<div class="panel-body">
+			<div class="table-responsive">
+				<table class="table">
+					<tr>
+						<td></td>
+						<td>{'Username'|lang}
+							<a href="?{$pagination.page_url.sort_cms}&sort=username" class="glyphicon glyphicon-sort-by-attributes" title="Sortuj po loginie"></a>
+							<a href="?{$pagination.page_url.sort_cms}&sort=username&sort_desc" class="glyphicon glyphicon-sort-by-attributes-alt" title="Sortuj malejąco po loginie"></a>
+						</td>
+						<td>{'Logged'|lang}
+							<a href="?{$pagination.page_url.sort_cms}&sort=logged" class="glyphicon glyphicon-sort-by-attributes" title="Sortuj po loginie"></a>
+							<a href="?{$pagination.page_url.sort_cms}&sort=logged&sort_desc" class="glyphicon glyphicon-sort-by-attributes-alt" title="Sortuj malejąco po loginie"></a>
+						</td>
+						<td>{'Date'|lang}
+							<a href="?{$pagination.page_url.sort_cms}&sort=date" class="glyphicon glyphicon-sort-by-attributes" title="Sortuj po dacie"></a>
+							<a href="?{$pagination.page_url.sort_cms}&sort=date&sort_desc" class="glyphicon glyphicon-sort-by-attributes-alt" title="Sortuj malejąco po dacie"></a>
+						</td>
+						<td>IP
+							<a href="?{$pagination.page_url.sort_cms}&sort=ip" class="glyphicon glyphicon-sort-by-attributes" title="Sortuj po IP"></a>
+							<a href="?{$pagination.page_url.sort_cms}&sort=ip&sort_desc" class="glyphicon glyphicon-sort-by-attributes-alt" title="Sortuj malejąco po IP"></a>
+						</td>
+					</tr>
+					{foreach key=key item=item from=$cms_logs name=cms_logs}
+						<tr>
+							<td>{$smarty.foreach.cms_logs.iteration+$pagination.limit_start}</td>
+							<td>{$item.username}</td>
+							<td>{if $item.logged}<b>{'Yes'|lang}</b>{else}<span style="color:red">{'No'|lang}</span>{/if}</td>
+							<td>{$item.date|date_format:"%H:%M"} / <b>{$item.date|date_format:"%d-%m-%Y"}</b></td>
+							<td>{$item.ip}</td>
+						</tr>
+					{/foreach}
+				</table>
+			</div>
+			{include file="pagination.tpl"}
+			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal_remove_logs">{'Remove logs'|lang}</button>
+		</div>
+	</div>
+{/if}
+
+

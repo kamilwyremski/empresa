@@ -1,0 +1,140 @@
+﻿
+<div class="page-header">
+	<h1><span class="glyphicon glyphicon-user"></span> {'Users'|lang}</h1>
+	<p>{'Here you can see the users. Moderator can edit offers'|lang}</p>
+</div>
+
+<form method="get" class="form-horizontal" role="form">
+	<input type="hidden" name="module" value="users">
+	<input type="hidden" name="search">
+	<div class="form-group">
+		<div class="col-md-4">
+			<label for="username">{'Username'|lang}:</label>
+			<input type="text" name="username" title="{'Enter the username'|lang}" placeholder="{'Username'|lang}" {if isset($smarty.get.username)}value="{$smarty.get.username}"{/if} class="form-control">
+		</div>
+		<div class="col-md-4">
+			<label for="email">{'Email'|lang}:</label>
+			<input type="text" name="email" title="{'Enter the email'|lang}" placeholder="{'Email'|lang}" {if isset($smarty.get.email)}value="{$smarty.get.email}"{/if} class="form-control">
+		</div>
+		<div class="col-md-2">
+			<label for="active">{'Active users'|lang}:</label>
+			<select name="active" title="{'Search by active users'|lang}" class="form-control">
+				<option value="">{'All users'|lang}</option>
+				<option value="yes" {if isset($smarty.get.active) && $smarty.get.active=='yes'}selected{/if}>{'Yes'|lang}</option>
+				<option value="no" {if isset($smarty.get.active) && $smarty.get.active=='no'}selected{/if}>{'No'|lang}</option>
+			</select>
+		</div>
+		<div class="col-md-2">
+			<label>&nbsp;</label><br>
+			<input type="submit" value="{'SEARCH!'|lang}" class="btn btn-primary">
+		</div>
+	</div>
+</form>
+<br>
+{if isset($users)}
+	<div class="table-responsive">
+		<table class="table parent_select_checkbox table-striped table-bordered table-condensed">
+			<tr>
+				<th class="text-center"><input type="checkbox" class="select_checkbox" title="{'Select all'|lang}"></th>
+				<th class="text-center">{'ID'|lang}<br>
+					<a href="?{$pagination.page_url.sort_cms}&sort=id" title="{'Sort by ID'|lang}" class="glyphicon glyphicon-sort-by-attributes"></a>
+					<a href="?{$pagination.page_url.sort_cms}&sort=id&sort_desc" title="{'Sort descending by ID'|lang}" class="glyphicon glyphicon-sort-by-attributes-alt"></a>
+				</th>
+				<th class="text-center">{'Activate'|lang}<br>
+					<a href="?{$pagination.page_url.sort_cms}&sort=active" title="{'Sort by active'|lang}" class="glyphicon glyphicon-sort-by-attributes"></a>
+					<a href="?{$pagination.page_url.sort_cms}&sort=active&sort_desc" title="{'Sort descending by active'|lang}" class="glyphicon glyphicon-sort-by-attributes-alt"></a>
+				</th>
+				<th class="text-center">{'FB'|lang}<br>
+					<a href="?{$pagination.page_url.sort_cms}&sort=register_fb" title="{'Sort by register by Facebook'|lang}" class="glyphicon glyphicon-sort-by-attributes"></a>
+					<a href="?{$pagination.page_url.sort_cms}&sort=register_fb&sort_desc" title="{'Sort descending by register by Facebook'|lang}" class="glyphicon glyphicon-sort-by-attributes-alt"></a>
+				</th>
+				<th>{'Username'|lang}<br>
+					<a href="?{$pagination.page_url.sort_cms}&sort=username" title="{'Sort by username'|lang}" class="glyphicon glyphicon-sort-by-attributes"></a>
+					<a href="?{$pagination.page_url.sort_cms}&sort=username&sort_desc" title="{'Sort descending by username'|lang}" class="glyphicon glyphicon-sort-by-attributes-alt"></a>
+				</th>
+				<th>{'Email'|lang}<br>
+					<a href="?{$pagination.page_url.sort_cms}&sort=email" title="{'Sort by email'|lang}" class="glyphicon glyphicon-sort-by-attributes"></a>
+					<a href="?{$pagination.page_url.sort_cms}&sort=email&sort_desc" title="{'Sort descending by email'|lang}" class="glyphicon glyphicon-sort-by-attributes-alt"></a>
+				</th>
+				<th class="text-center">{'Moderator'|lang}<br>
+					<a href="?{$pagination.page_url.sort_cms}&sort=moderator" title="{'Sort by moderator'|lang}" class="glyphicon glyphicon-sort-by-attributes"></a>
+					<a href="?{$pagination.page_url.sort_cms}&sort=moderator&sort_desc" title="{'Sort descending by moderator'|lang}" class="glyphicon glyphicon-sort-by-attributes-alt"></a>
+				</th>
+				<th class="text-center">{'Amount offers'|lang}<br>({'active'|lang})</th>
+				<th class="text-center">{'Amount logins'|lang}<br>{'Last'|lang}</th>
+				<th>{'Activation date'|lang}
+					<a href="?{$pagination.page_url.sort_cms}&sort=activation_date" title="{'Sort by activation date'|lang}" class="glyphicon glyphicon-sort-by-attributes"></a>
+					<a href="?{$pagination.page_url.sort_cms}&sort=activation_date&sort_desc" title="{'Sort descending by activation date'|lang}" class="glyphicon glyphicon-sort-by-attributes-alt"></a>
+					<br>
+					{'Activation IP'|lang}
+					<a href="?{$pagination.page_url.sort_cms}&sort=activation_ip" title="{'Sort by activation IP'|lang}" class="glyphicon glyphicon-sort-by-attributes"></a>
+					<a href="?{$pagination.page_url.sort_cms}&sort=activation_ip&sort_desc" title="{'Sort descending by activation IP'|lang}" class="glyphicon glyphicon-sort-by-attributes-alt"></a>
+				</th>
+				<th>{'Registration date'|lang}
+					<a href="?{$pagination.page_url.sort_cms}&sort=date" title="{'Sort by registration date'|lang}" class="glyphicon glyphicon-sort-by-attributes"></a>
+					<a href="?{$pagination.page_url.sort_cms}&sort=date&sort_desc" title="{'Sort descending by registration date'|lang}" class="glyphicon glyphicon-sort-by-attributes-alt"></a>
+					<br>
+					{'Registration IP'|lang}
+					<a href="?{$pagination.page_url.sort_cms}&sort=register_ip" title="{'Sort by registration IP'|lang}" class="glyphicon glyphicon-sort-by-attributes"></a>
+					<a href="?{$pagination.page_url.sort_cms}&sort=register_ip&sort_desc" title="{'Sort descending by registration IP'|lang}" class="glyphicon glyphicon-sort-by-attributes-alt"></a>
+				</th>
+				<th class="text-center">{'Remove'|lang}</th>
+			</tr>
+			{foreach key=key item=item from=$users name=users}
+				<tr>
+					<td class="text-center"><input type="checkbox" name="users[]" value="{$item.id}" form="form_selected_users"></td>
+					<td class="text-center">{$item.id}</td>
+					<td class="text-center">{if !$item.active}<a href="#" title="{'Activate user'|lang}" class="ajax glyphicon glyphicon-plus-sign" data-action="activate_user" data-id="{$item.id}"></a>{/if}</td>
+					<td class="text-center">{if $item.register_fb}<img src="images/fb-icon.gif" alt="Facebook">{/if}</td>
+					<td><b><a href="../{$links.profile}/{$item.username}" title="{'Profile of'|lang}: {$item.username}" target="_blank">{$item.username}</a></b></td>
+					<td>{if $smarty.const._CMS_TEST_MODE_}TEST{else}<a href="mailto:{$item.email}" title="{'Write to:'|lang} {$item.email}">{$item.email}</a>{/if}</td>	
+					<td class="text-center">{if $item.moderator}<a href="#" title="{'Unset moderator'|lang}" class="ajax" data-action="unset_moderator" data-id="{$item.id}">{'YES'|lang}</b>{else}<a href="#" title="{'Set moderator'|lang}" class="ajax" data-action="set_moderator" data-id="{$item.id}" style="color: grey">{'NO'|lang}</a>{/if}</td>
+					<td class="text-center">{$item.amount_offers}<br>(<b>{$item.amount_active_offers}</b>)</td>
+					<td class="text-center"><b>{$item.amount_logins}</b><br>{$item.last_login|date_format:"%d-%m-%Y"}</td>
+					<td class="text-center">{$item.activation_date|date_format:"%d-%m-%Y"}<br>{$item.activation_ip}</td>
+					<td class="text-center">{$item.date|date_format:"%d-%m-%Y"}<br>{$item.register_ip}</td>
+					<td class="text-center"><a href="#" title="{'Delete user'|lang}" class="glyphicon glyphicon-remove" data-toggle="modal" data-target="#remove_{$item.id}"></a></td>
+				</tr>
+				
+				<div class="modal fade" id="remove_{$item.id}" tabindex="-1" role="dialog" aria-labelledby="{'Delete user'|lang}: {$item.username}">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title">{'Delete user'|lang}</h4>
+							</div>
+							<form method="post">
+								<input type="hidden" name="action" value="remove_user">
+								<input type="hidden" name="id" value="{$item.id}">
+								<div class="modal-body">
+									<p>{'Are you sure you want to delete user'|lang}: "{$item.username}"?</p>
+									<p>{'All offers user will be deleted'|lang}</p>
+								</div>
+								<div class="modal-footer">
+									<input type="button" class="btn btn-default" data-dismiss="modal" value="{'Cancel'|lang}">
+									<input type="submit" class="btn btn-danger" value="{'Execute'|lang}">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			{/foreach}		
+		</table>
+	</div>
+	<br>
+	<form method="post" id="form_selected_users" class="form-inline">
+		<label for="action">{'Selected'|lang}: </label>
+		<select name="action" required title="{'Select the appropriate action'|lang}" class="form-control">
+			<option value="">-- {'select'|lang} --</option>
+			<option value="remove_users">{'Remove users'|lang}</option>
+		</select> 
+		<input type="submit" value="{'Execute'|lang}!" class="btn btn-sm btn-danger">
+	</form>
+
+	{include file="pagination.tpl"}
+	
+{else}
+	<h4 class="text-danger">{'Nothing found'|lang}</h4>
+{/if}
+
+

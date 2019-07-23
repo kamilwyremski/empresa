@@ -1,0 +1,68 @@
+﻿
+<div class="page-header">
+	<h1><span class="glyphicon glyphicon-edit"></span> {'Index page'|lang}</h1>
+	<p>{'Here you can edit the index page'|lang}</p>
+</div>
+
+<form method="post" class="form-horizontal" role="form">
+	<input type="hidden" name="action" value="save_index_page">
+	<label class="control-label">{'Content 1 on index page'|lang}:</label>
+	<textarea name="text_1" placeholder="{'Content'|lang}" title="{'Content 1 on index page'|lang}" class="form-control">{$index_page.text_1}</textarea>
+	<script>
+		run_ckeditor('text_1');
+	</script>	
+	<br>
+	<input type="submit" value="{'SAVE!'|lang}" class="btn btn-primary">
+</form>
+<br><br>
+<h3>{'Slider'|lang}</h3>
+<form method="post" action="">
+	<input type="hidden" name="action" value="add_slide">
+	<input type="submit" value="{'Add slide'|lang}" class="btn btn-sm btn-success">
+</form>
+<br>
+{if isset($slider)}				
+	{foreach key=key item=item from=$slider name=slider}
+		<form method="post" action="">
+			<input type="hidden" name="action" value="save_slide">
+			<input type="hidden" name="id" value="{$item.id}">
+			<textarea id="slide_{$item.id}" name="content">{$item.content}</textarea>
+			<script>
+				run_ckeditor('slide_{$item.id}');
+			</script>	
+			<br>
+			<input type="submit" value="{'SAVE!'|lang}" class="btn btn-sm btn-primary">
+		</form>
+		
+		<p><a href="#" title="{'Remove slide'|lang}" data-toggle="modal" data-target="#remove_slide_{$item.id}">{'Remove slide'|lang}</a></p>
+		
+		<br><br>
+
+		<div class="modal fade" id="remove_slide_{$item.id}" tabindex="-1" role="dialog" aria-labelledby="{'Remove slide'|lang}">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">{'Remove slide'|lang}</h4>
+					</div>
+					<form method="post">
+						<input type="hidden" name="action" value="remove_slide">
+						<input type="hidden" name="id" value="{$item.id}">
+						<div class="modal-body">
+							<p>{'Are you sure you want to remove a slide'|lang}?</p>
+						</div>
+						<div class="modal-footer">
+							<input type="button" class="btn btn-default" data-dismiss="modal" value="{'Cancel'|lang}">
+							<input type="submit" class="btn btn-danger" value="{'Execute'|lang}">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	{/foreach}		
+{else}
+	<h4 class="text-danger">{'Nothing found'|lang}</h4>
+{/if}
+
+

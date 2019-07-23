@@ -1,0 +1,61 @@
+﻿
+<div class="page-header">
+	<h1><span class="glyphicon glyphicon-tree-deciduous"></span> {'Offers options'|lang}</h1>
+	<p>{'Here you can edit the offers options'|lang}</p>
+</div>
+<p><a href="?module=offers_option" title="{'Add option'|lang}" class="btn btn-success">{'Add option'|lang}</a></p>
+<br>
+{if isset($offers_options)}
+	<table class="table parent_select_checkbox table-striped table-bordered table-condensed">
+		<tr>
+			<th></th>
+			<th>{'The name'|lang}</th>
+			<th class="text-center" style="width:55px">{'Position'|lang}</th>
+			<th>{'Kind'|lang}</th>
+			<th>{'Available choices'|lang}</th>
+			<th class="text-center">{'Required'|lang}</th>
+			<th class="text-center">{'Edit'|lang}</th>
+			<th class="text-center">{'Remove'|lang}</th>
+		</tr>
+			
+		{foreach key=key item=item from=$offers_options name=offers_options}
+			<tr>
+				<td>{$smarty.foreach.offers_options.iteration}</td>
+				<td>{$item.name}</td>
+				<td class="text-center">
+					<a href="#" title="{'Position up'|lang}" class="glyphicon glyphicon-arrow-up ajax {if $smarty.foreach.offers_options.first}inactive{/if}" data-action="position_offers_options" data-id="{$item.id}" data-position="{$item.position}" data-plusminus="+"></a>
+					<a href="#" title="{'Position down'|lang}" class="glyphicon glyphicon-arrow-down ajax {if $smarty.foreach.offers_options.last}inactive{/if}" data-action="position_offers_options" data-id="{$item.id}" data-position="{$item.position}" data-plusminus="-"></a>
+				</td>
+				<td>{$item.kindName}</td>
+				<td>{$item.select_choices}</td>
+				<td class="text-center">{if $item.required}{'Yes'|lang}{/if}</td>
+				<td class="text-center"><a href="?module=offers_option&id={$item.id}" title="{'Edit'|lang}" class="glyphicon glyphicon-edit"></a></td>
+				<td class="text-center"><a href="#" title="{'Remove'|lang}" class="glyphicon glyphicon-remove" data-toggle="modal" data-target="#remove_{$item.id}"></a></td>				
+			</tr>
+			
+			<div class="modal fade" id="remove_{$item.id}" tabindex="-1" role="dialog" aria-labelledby="{'Remove option'|lang}: {$item.name}">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title">{'Remove option'|lang}</h4>
+						</div>
+						<form method="post">
+							<input type="hidden" name="action" value="remove_option">
+							<input type="hidden" name="id" value="{$item.id}">
+							<div class="modal-body">
+								<p>{'Are you sure you want to remove option'|lang}: "{$item.name}"?</p>
+							</div>
+							<div class="modal-footer">
+								<input type="button" class="btn btn-default" data-dismiss="modal" value="{'Cancel'|lang}">
+								<input type="submit" class="btn btn-danger" value="{'Execute'|lang}">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		{/foreach}		
+	</table>
+{else}
+	<h4 class="text-danger">{'Nothing found'|lang}</h4>
+{/if}

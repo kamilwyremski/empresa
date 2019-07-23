@@ -1,0 +1,64 @@
+
+<div class="page-header">
+	<h1><span class="glyphicon glyphicon-asterisk"></span> {'Payment settings'|lang}</h1>
+	<p>{'Here you can edit the settings of the service'|lang}</p>
+</div>
+
+<form method="post" class="form-horizontal" role="form">
+	<input type="hidden" name="action" value="save_settings_payments">
+	<div class="form-group">
+		<label for="currency" class="col-sm-3 control-label">{'Shortcut currency'|lang}:</label>
+		<div class="col-sm-9">
+			<input type="text" name="currency" placeholder="zł" title="{'Shortcut currency'|lang}" value="{$settings.currency}" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="promote_days" class="col-sm-3 control-label">{'Promoting - the number of days'|lang}:</label>
+		<div class="col-sm-9">
+			<input type="number" min="1" step="1" name="promote_days" title="{'Promoting - the number of days'|lang}" value="{$settings.promote_days}" class="target_promote_by_dotpay form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="promote_cost" class="col-sm-3 control-label">{'The cost of a promote'|lang}:</label>
+		<div class="col-sm-9">
+			<input type="number" min="0" step="0.01" name="promote_cost" title="{'The cost of a promote'|lang}" value="{$settings.promote_cost}" class="target_promote_by_dotpay form-control">
+		</div>
+	</div>
+	<hr>
+	<div class="form-group">
+		<div class="col-sm-9 col-sm-offset-3">
+			<label><input type="checkbox" name="promote_by_dotpay" title="{'Promote by DotPay'|lang}" {if $settings.promote_by_dotpay}checked{/if} class="set_required" data-target="target_promote_by_dotpay"> {'Promote by DotPay'|lang}</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="dotpay_id" class="col-sm-3 control-label">{'Dotpay ID'|lang}:</label>
+		<div class="col-sm-9">
+			<input type="text" name="dotpay_id" title="{'Dotpay ID'|lang}" value="{$settings.dotpay_id}" class="target_promote_by_dotpay form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="dotpay_pin" class="col-sm-3 control-label">{'Dotpay PIN'|lang}:</label>
+		<div class="col-sm-9">
+			<input type="text" name="dotpay_pin" title="{'Dotpay PIN'|lang}" value="{if $smarty.const._CMS_TEST_MODE_}test{else}{$settings.dotpay_pin}{/if}" class="target_promote_by_dotpay form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="dotpay_currency" class="col-sm-3 control-label">{'Dotpay currency'|lang}:</label>
+		<div class="col-sm-9">
+			<input type="text" name="dotpay_currency" title="{'Dotpay currency'|lang}" value="{$settings.dotpay_currency}" class="target_promote_by_dotpay form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-9 col-sm-offset-3">
+			<label><input type="checkbox" name="dotpay_test_mode" title="{'Dotpay Test Mode'|lang}" {if $settings.dotpay_test_mode}checked{/if}> {'Dotpay Test Mode'|lang}</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-9 col-sm-offset-3">
+			<input type="submit" value="{'Save'|lang}" class="btn btn-primary">
+		</div>
+	</div>
+</form>
+
+	
+	

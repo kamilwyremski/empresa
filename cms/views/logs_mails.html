@@ -1,0 +1,47 @@
+﻿
+<div class="page-header">
+	<h1><span class="glyphicon glyphicon-hdd"></span> {'Logs mails'|lang}</h1>
+	<p>{'Here you can see logs mails send from serwer'|lang}</p>
+</div>
+	
+{if isset($logs_mails)}
+	<div class="table-responsive">
+		<table class="table parent_select_checkbox table-striped table-bordered table-condensed">
+			<tr>
+				<th></th>
+				<th>{'Receiver'|lang}
+					<a href="?{$pagination.page_url.sort_cms}&sort=receiver" title="{'Sort by receiver'|lang}" class="glyphicon glyphicon-sort-by-attributes"></a>
+					<a href="?{$pagination.page_url.sort_cms}&sort=receiver&sort_desc" title="{'Sort descending by receiver'|lang}" class="glyphicon glyphicon-sort-by-attributes-alt"></a>
+				</th>
+				<th>{'Action'|lang}
+					<a href="?{$pagination.page_url.sort_cms}&sort=action" title="{'Sort by action'|lang}" class="glyphicon glyphicon-sort-by-attributes"></a>
+					<a href="?{$pagination.page_url.sort_cms}&sort=action&sort_desc" title="{'Sort descending by action'|lang}" class="glyphicon glyphicon-sort-by-attributes-alt"></a>
+				</th>
+				<th class="text-center">{'IP'|lang}
+					<a href="?{$pagination.page_url.sort_cms}&sort=ip" title="{'Sort by IP'|lang}" class="glyphicon glyphicon-sort-by-attributes"></a>
+					<a href="?{$pagination.page_url.sort_cms}&sort=ip&sort_desc" title="{'Sort descending by IP'|lang}" class="glyphicon glyphicon-sort-by-attributes-alt"></a>
+				</th>
+				<th class="text-center" style="width:95px">{'Date'|lang}
+					<a href="?{$pagination.page_url.sort_cms}&sort=date" title="{'Sort by date'|lang}" class="glyphicon glyphicon-sort-by-attributes"></a>
+					<a href="?{$pagination.page_url.sort_cms}&sort=date&sort_desc" title="{'Sort descending by date'|lang}" class="glyphicon glyphicon-sort-by-attributes-alt"></a>
+				</th>
+			</tr>
+			{foreach key=key item=item from=$logs_mails name=logs_mails}
+				<tr>
+					<td class="text-center">{$smarty.foreach.logs_mails.iteration+$pagination.limit_start}</td>
+					<td>{if $smarty.const._CMS_TEST_MODE_}TEST{else}<a href="mailto:{$item.receiver}" title="{'Write to:'|lang} {$item.receiver}">{$item.receiver}</a>{/if}</td>
+					<td>{$item.action}</td>
+					<td class="text-center">{$item.ip}</td>
+					<td class="text-center"><b>{$item.date|date_format:"%d-%m-%Y"}</b><br>{$item.date|date_format:"%H:%M"}</td>
+				</tr>
+			{/foreach}		
+		</table>
+	</div>
+	
+	{include file="pagination.tpl"}
+	
+{else}
+	<h4 class="text-danger">{'Nothing found'|lang}</h4>
+{/if}
+
+

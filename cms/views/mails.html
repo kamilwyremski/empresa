@@ -1,0 +1,45 @@
+
+<div class="page-header">
+	<h1><span class="glyphicon glyphicon-edit"></span> {'Mails'|lang}</h1>
+	<p>{'Edit the content of messages sent from your site'|lang}</p>
+</div>
+
+<h4>{'You can use these tags'|lang}:</h4>
+<ul>
+	<li><b>{ldelim}title{rdelim}</b> - {'Title of website'|lang}</li>
+	<li><b>{ldelim}base_url{rdelim}</b> - {'Base URL'|lang}</li>
+	<li><b>{ldelim}link_logo{rdelim}</b> - {'Link to logo'|lang}</li>
+	<li><b>{ldelim}date{rdelim}</b> - {'The current date'|lang}</li>
+	<li><b>{ldelim}username{rdelim}</b> - {'Username'|lang}</li>
+	<li><b>{ldelim}activation_link{rdelim}</b> - {'Activation link'|lang}</li>
+	<li><b>{ldelim}password{rdelim}</b> - {'Hasło'|lang}</li>
+	<li><b>{ldelim}reset_password_link{rdelim}</b> - {'Link to generate new password'|lang}</li>
+	<li><b>{ldelim}name{rdelim}</b> - {'Name of the sender'|lang}</li>
+	<li><b>{ldelim}email{rdelim}</b> - {'Email of the sender'|lang}</li>
+	<li><b>{ldelim}message{rdelim}</b> - {'Message from the sender'|lang}</li>
+	<li><b>{ldelim}offer_name{rdelim}</b> - {'Offer name'|lang}</li>
+	<li><b>{ldelim}offer_url{rdelim}</b> - {'Offer URL'|lang}</li>
+	<li><b>{ldelim}offer_edit_link{rdelim}</b> - {'Link to edit offer'|lang}</li>
+</ul>
+<br><br>
+<form role="form" class="form-horizontal" method="post">
+	<input type="hidden" name="action" value="save_mails">
+	{foreach from=$mails item=item key=key}
+		<div class="form-group">
+			<h4>{$item.full_name|lang}</h4>
+			<input type="text" name="mails[{$item.name}][subject]" value="{$item.subject}" title="{'Enter the message title'|lang}" placeholder="{'Title'|lang}" class="form-control">
+		</div>
+		<div class="form-group">
+			<textarea name="mails[{$item.name}][message]" id="message_{$item.name}" class="form-control">{$item.message}</textarea>
+			<script>
+				run_ckeditor('message_{$item.name}');
+			</script>
+		</div>
+		<br>
+	{/foreach}
+	<div class="form-group">
+		<input type="submit" value="{'Save'|lang}" class="btn btn-primary">
+	</div>
+</form>
+
+	
