@@ -63,13 +63,13 @@ if(isset($_POST['base_url']) and $_POST['base_url']!='' and isset($_POST['serwer
 			}
 	 
 			file_put_contents('../config/db.php', '<?php
-$mysql_server = "'.$_POST['serwer'].'";
-$mysql_user = "'.$_POST['user'].'";  
-$mysql_pass = "'.$_POST['password'].'"; 
-$mysql_db = "'.$_POST['name'].'";
+$mysql_server = \''.$_POST['serwer'].'\';
+$mysql_user = \''.$_POST['user'].'\';  
+$mysql_pass = \''.$_POST['password'].'\'; 
+$mysql_db = \''.$_POST['name'].'\';
 
-define("_DB_PREFIX_", "'._DB_PREFIX_.'");
-define("_PASS_HASH_", "'.$_POST['pass_hash'].'");
+define("_DB_PREFIX_", \''._DB_PREFIX_.'\');
+define("_PASS_HASH_", \''.$_POST['pass_hash'].'\');
 
 ');	
 
