@@ -1,4 +1,13 @@
 <?php
+
+session_start(); 
+
+require_once(realpath(dirname(__FILE__)).'/../../../../config/config.php');
+require_once(realpath(dirname(__FILE__)).'/../../../php/user_cms.class.php');
+
+if(!$user_cms->logged_in){
+	die();
+}
 /*
   RoxyFileman - web based file manager. Ready to use with CKEditor, TinyMCE. 
   Can be easily integrated with any other WYSIWYG editor or CMS.
