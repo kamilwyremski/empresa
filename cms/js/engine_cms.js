@@ -56,7 +56,7 @@
 $(document).on('click', '.open_roxy', function(){
 	$('.roxy_target').removeClass('roxy_target');
 	$(this).find('img').addClass('roxy_target');
-	$('#roxyCustomPanel').modal({show:true}).find('iframe').attr("src",'js/ckeditor/fileman/index.html?integration=custom');
+	$('#roxyCustomPanel').modal({show:true}).find('iframe').attr("src",'js/ckeditor/fileman');
 	return false;
 })
 	
@@ -67,7 +67,7 @@ function closeCustomRoxy(){
 }
 
 function run_ckeditor(id,height=200){
-	var roxyFileman = 'js/ckeditor/fileman/index.html'; 
+	var roxyFileman = 'js/ckeditor/fileman'; 
 	$(function(){
 		CKEDITOR.replace( id,{height: height,
 			filebrowserBrowseUrl:roxyFileman,
