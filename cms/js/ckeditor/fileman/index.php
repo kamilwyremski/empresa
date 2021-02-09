@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+<?php
+
+session_start(); 
+
+require_once('../../../../config/config.php');
+require_once('../../../php/user_cms.class.php');
+
+if(!$user_cms->logged_in){
+	die();
+}
+?><!DOCTYPE html>
 <html>
 <head>
 <!--
