@@ -47,7 +47,10 @@
 					if ( typeof displayMap == 'function' ) { 
 						displayMap();
 					}else{
-						autocomplete = new google.maps.places.Autocomplete((document.getElementById('search_main_address')), {types: ['geocode']});
+						const search_main_address = document.getElementById('search_main_address');
+						if(search_main_address){
+							new google.maps.places.Autocomplete(search_main_address, {types: ['geocode']});
+						}
 					}
 				}
 			{/literal}
