@@ -10,9 +10,15 @@
 		<script>
 			{literal}
 			function displayMap() {
-				autocomplete = new google.maps.places.Autocomplete((document.getElementById('search_main_address')), {types: ['geocode']});
-				autocomplete2 = new google.maps.places.Autocomplete((document.getElementById('search_box_address')), {types: ['geocode']});
-				var map = new google.maps.Map(document.getElementById('google_maps'), {
+				const search_main_address = document.getElementById('search_main_address');
+				if(search_main_address){
+					new google.maps.places.Autocomplete(search_main_address, {types: ['geocode']});
+				}
+				const search_box_address = document.getElementById('search_box_address');
+				if(search_box_address){
+					new google.maps.places.Autocomplete(search_box_address, {types: ['geocode']});
+				}
+				const map = new google.maps.Map(document.getElementById('google_maps'), {
 						center: new google.maps.LatLng({/literal}{$settings.google_maps_lat},{$settings.google_maps_long}{literal}),
 						zoom: 6,
 						mapTypeId: google.maps.MapTypeId.ROADMAP,
