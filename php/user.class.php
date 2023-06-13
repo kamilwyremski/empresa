@@ -14,6 +14,9 @@ if(!isset($settings['base_url'])){
 }
 
 class user {
+
+	public $logged_in;
+	public $user_data;
 	
 	public function __construct () {
 		global $db, $settings;

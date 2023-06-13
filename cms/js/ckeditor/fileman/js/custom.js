@@ -34,7 +34,7 @@ function FileSelected(file){
    * 
    */
   $(window.parent.document).find('.roxy_target').attr('src', file.fullPath);
-	window.parent.closeCustomRoxy();
+	window.parent.closeRoxySelectFile();
 }
 function GetSelectedValue(){
   /**

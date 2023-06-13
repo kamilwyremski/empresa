@@ -56,7 +56,7 @@
 $(document).on('click', '.open_roxy', function(){
 	$('.roxy_target').removeClass('roxy_target');
 	$(this).find('img').addClass('roxy_target');
-	$('#roxyCustomPanel').modal({show:true}).find('iframe').attr("src",'js/ckeditor/fileman');
+	$('#roxyCustomPanel').modal({show:true}).find('iframe').attr("src",'js/ckeditor/fileman?integration=custom');
 	return false;
 })
 	

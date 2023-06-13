@@ -14,6 +14,7 @@ if(!isset($settings['base_url'])){
 }
 
 class offers_options {
+	public $kinds;
 	
 	public function __construct () {
 		$this->kinds = array('text'=>lang('Text field'),'number'=>lang('Numeric field'),'select'=>lang('Select field'));

@@ -57,8 +57,7 @@ function sort_by(){
 }
 
 function filter($text){
-    if(get_magic_quotes_gpc()){$text = stripslashes($text);}
-    return htmlspecialchars(trim(strip_tags($text))); 
+  return htmlspecialchars(trim(strip_tags($text))); 
 }
 
 function purify($text=''){

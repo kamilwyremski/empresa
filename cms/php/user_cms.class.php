@@ -14,6 +14,11 @@ if(!isset($settings['base_url'])){
 }
 
 class user_cms {
+
+	public $logged_in;
+	public $error;
+	public $info;
+	public $user_data;
 	
 	public function __construct () {
 		global $db;

@@ -14,6 +14,7 @@ if(!isset($settings['base_url'])){
 }
 
 class offer {
+	public $offer_data;
 	
 	public function __get($value){
 		return $this->offer_data[$value];
