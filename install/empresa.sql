@@ -452,7 +452,7 @@ INSERT INTO `settings` (`name`, `value`) VALUES
 ('facebook_side_panel', ''),
 ('favicon', '/upload/images/favicon.png'),
 ('footer_bottom', ''),
-('footer_text', '<p class="small">Project 2017 - 2019 by <a href="http://wyremski.pl" target="_blank" title="Creating websites">Kamil Wyremski</a></p>'),
+('footer_text', ''),
 ('footer_top', ''),
 ('generate_sitemap', '1'),
 ('google_maps', ''),
