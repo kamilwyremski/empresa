@@ -60,7 +60,7 @@ $(document).on('click', '.open_roxy', function(){
 	return false;
 })
 	
-function closeCustomRoxy(){
+function closeRoxySelectFile(){
 	$roxy_target = $('.roxy_target');
 	$("[name='"+$roxy_target.data('roxy_name')+"']").val($roxy_target.attr('src'));
 	$('#roxyCustomPanel').modal('hide');
