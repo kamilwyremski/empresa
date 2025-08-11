@@ -9,20 +9,20 @@
  * 
  * *********************************************************************
  * THIS SOFTWARE IS LICENSED - YOU CAN MODIFY THESE FILES
- * BUT YOU CAN NOT REMOVE OF ORIGINAL COMMENTS!
- * ACCORDING TO THE LICENSE YOU CAN USE THE SCRIPT ON ONE DOMAIN. DETECTION
- * COPY SCRIPT WILL RESULT IN A HIGH FINANSIAL PENALTY AND WITHDRAWAL
- * LICENSE THE SCRIPT
+Â * BUT YOU CAN NOT REMOVE OF ORIGINAL COMMENTS!
+Â * ACCORDING TO THE LICENSE YOU CAN USE THE SCRIPT ON ONE DOMAIN. DETECTION
+Â * COPY SCRIPT WILL RESULT IN A HIGH FINANSIAL PENALTY AND WITHDRAWAL
+Â * LICENSE THE SCRIPT
  * *********************************************************************/
  
 session_start();
 $znaki = '123456789qwertyuipasdfghjklzxcvbnm';
-$szerokosc = 120;         // szerokoœæ obrazka
-$wysokosc = 30;            // wysokoœæ obrazka
-$ilosc_znakow = 6;        // d³ugoœæ captchy
+$szerokosc = 120;         // szerokoÅ“Ã¦ obrazka
+$wysokosc = 30;            // wysokoÅ“Ã¦ obrazka
+$ilosc_znakow = 6;        // dÂ³ugoÅ“Ã¦ captchy
 $str = '';            // zmienna pomocnicza
  
-// losowanie ci¹gu znkaów
+// losowanie ciÂ¹gu znkaÃ³w
 for ($i = 0; $i < $ilosc_znakow; $i++)
     $str .= substr($znaki, mt_rand(0, strlen($znaki) -1), 1);
  
@@ -38,7 +38,7 @@ $czcionka   = imagecolorallocate($im,177,177,177);
 $siatka   = imagecolorallocate($im,78,78,78);
 $ramka = imagecolorallocate ($im, 131, 131, 131);
  
-imagefill($im,1,1,$tlo); // wype³nienie t³em
+imagefill($im,1,1,$tlo); // wypeÂ³nienie tÂ³em
  
 // losowanie siatki
 for($i=0; $i<1600; $i++)
@@ -48,8 +48,8 @@ for($i=0; $i<1600; $i++)
     imageline($im, $rand1, $rand2, $rand1, $rand2, $siatka);
 }
  
-// losowanie pozycji znaków
-$x = rand(5, $szerokosc/(7/2));
+// losowanie pozycji znakÃ³w
+$x = rand(5, (int)($szerokosc / (7/2)));
  
 // dodawanie obramowania
 imagerectangle($im, 0, 0, $szerokosc-1, $wysokosc-1, $ramka);
@@ -58,10 +58,10 @@ imagerectangle($im, 0, 0, $szerokosc-1, $wysokosc-1, $ramka);
 for($a=0; $a < 7; $a++)
 {
     imagestring($im, 6, $x, rand(4 , $wysokosc/5), substr($string, $a, 1), $czcionka);
-    $x += (5*3); // odstêp miêdzy literami
+    $x += (5*3); // odstÃªp miÃªdzy literami
 }
  
-// zwrócenie wygenerowanego obrazka, ustawienie typu mime na GIF
+// zwrÃ³cenie wygenerowanego obrazka, ustawienie typu mime na GIF
 header("Content-type: image/gif");
 imagegif($im);
 imagedestroy($im);
